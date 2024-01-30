@@ -10,18 +10,16 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain1(HttpSecurity http) throws Exception {
         http.authorizeRequests().anyRequest().authenticated();
+        // 둘다 설정해놓으면 formLogin
         http.formLogin();
-//        http.apply(new CustomSecurityConfigurer().setFlag(true));
-
-        return http.build();
-    }
-
-    @Bean
-    SecurityFilterChain securityFilterChain2(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().authenticated();
-//        http.formLogin();
-//        http.apply(new CustomSecurityConfigurer().setFlag(true));
         http.httpBasic();
+//         Custom authentication entry point가 우선 순위가 가장 높다
+//        http.exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint() {
+//            @Override
+//            public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+//                System.out.println("custom entryPoint");
+//            }
+//        });
 
         return http.build();
     }
