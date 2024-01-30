@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+  <button name="corsTest" onclick="corsTest()">corsTest</button>
+
+  <script>
+    const corsTest = () => {
+        fetch("http://localhost:8081/api/users", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => res.json()).then(data => console.log(data)).catch(e => {
+            console.error("Error", e);
+        })
+    }
+  </script>
+</body>
+</html>
